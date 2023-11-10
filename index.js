@@ -14,10 +14,11 @@ rl.question('Enter a number: ', (input) => {
   const number = parseInt(input, 10);
   const testData = Array.from({ length: number }, (_, i) => i + 1);
 
-  // Use the number in your logic (e.g., calculate factorial)
-
+  // MAIN PROCESS
   console.time('node');
+
   const nodeCalc = calculateSumOfSquares(testData);
+
   console.timeEnd('node');
   console.log(`Node Factorial of ${number} is: ${nodeCalc}`);
 

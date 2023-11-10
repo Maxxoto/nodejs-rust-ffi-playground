@@ -1,4 +1,5 @@
 use neon::prelude::*;
+use neon::types::buffer::TypedArray;
 use rayon::prelude::*;
 
 fn factorial(n: u32) -> u32 {
@@ -25,22 +26,21 @@ fn hello(mut cx: FunctionContext) -> JsResult<JsString> {
     Ok(cx.string("hello node"))
 }
 fn calculate_sum_of_squares(mut cx: FunctionContext) -> JsResult<JsNumber> {
-    let js_array = cx.argument::<JsArray>(0)?;
+     // Receive a JsTypedArray as an argument
+     let typed_array: Handle<JsTypedArray<u32>> = cx.argument::<JsTypedArray<u32>>(0)?;
 
-    // Convert JsArray to Vec<f64>
-    let js_values: Vec<f64> = js_array
-        .to_vec(&mut cx)?
-        .into_iter()
-        .map(|item| item.downcast::<JsNumber, _>(&mut cx).unwrap().value(&mut cx))
-        .collect();
+     // Access the underlying data as a slice of u32
+    let data: &[u32] = typed_array.as_slice(&cx);
 
-    // Use parallel iterator for better performance
-    let sum_of_squares: f64 = js_values
-        .par_iter()
-        .map(|x| x * x)
-        .sum();
+    // Convert the slice to a Vec<f64>
+    let f64_data: Vec<f64> = data.iter().map(|&x| x as f64).collect();
 
-    Ok(cx.number(sum_of_squares))
+
+     // Use parallel iterator for better performance
+     let sum_of_squares: f64 = f64_data.par_iter().map(|x| x * x).sum();
+
+
+     Ok(cx.number(sum_of_squares))
 }
 
 #[neon::main]
