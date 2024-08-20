@@ -1,4 +1,4 @@
-# Backend Perfomance Optimization In NodeJS using Rust with Foreign Function Interface
+# Perfomance Optimization In NodeJS using Rust with Foreign Function Interface
 
 ## :zap: Performance Benchmark
 ![grid](assets/benchmark.png)
@@ -38,21 +38,20 @@ $ npm run build
 
 This command uses the [cargo-cp-artifact](https://github.com/neon-bindings/cargo-cp-artifact) utility to run the Rust build and copy the built library into `./index.node`.
 
-#### `npm build-release`
+`npm build-release`
 
 Same as [`npm build`](#npm-build) but, builds the module with the [`release`](https://doc.rust-lang.org/cargo/reference/profiles.html#release) profile. Release builds will compile slower, but run faster.
 
-### `npm test`
+`npm test`
 
 Runs the unit tests by calling `cargo test`. You can learn more about [adding tests to your Rust code](https://doc.rust-lang.org/book/ch11-01-writing-tests.html) from the [Rust book](https://doc.rust-lang.org/book/).
 
-
-## Exploring rust-compute-experiment
+## Explore the project
 
 ### Run sum of square using NodeJS
-```node index.js```
+`node index.js`
 ### Run sum of square using NodeJS + Rust
-```node rust.js```
+`node rust.js`
 
 ## Learn More
 
