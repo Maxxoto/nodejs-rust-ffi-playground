@@ -13,7 +13,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 rayon = "1.5.1"
-
+#neon = "0.10"
 [dependencies.neon]
 version = "0.10"
 default-features = false
